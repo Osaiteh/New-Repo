@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>TIIDELAB Signup Form</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <style>
+        input {
+            width: 80%;
+            padding: 10px;
+            margin: 5px 20px;
+            border-radius: 10px;
+            background-color: rgba(0, 157, 219, 0.158);
+            border-bottom-color: #009EDB;
+            border-top-color: transparent;
+            border-right-color: #eb096c;
+            border-left: transparent;
+            color:black;
+        }
+        .body{
+            background-color: white;
+        }
+        .submit {
+            background-color: #eb096c;
+            width: 87%;
+            color:aliceblue;
+            font-size: 24px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+        .submit:hover {
+            background-color: aliceblue;
+            color: #eb096c;
+}
+        
+        input:focus {
+            background-color: white;
+            color: rgb(0, 0, 0);
+            outline: none;
+        }
+        
+        h3 {
+            color: #eb096c;
+            margin: 25px;
+            font-size: 32px;
+        }
+        
+        .formcontainer {
+            width: 50%; 
+            float: left;
+        }
+
+        .imagecontainer{
+            width: 50%; 
+            float: left;
+        }
+
+        .imageformcontainer{
+            background-color: rgba(255, 228, 225, 0); 
+            height: 60%;
+            margin: 0px;;
+        }
+        @media screen and (max-width:800px) {
+            .formcontainer, .imagecontainer{
+                width: 100%;
+            }
+        }
+    </style>
+
+   
+
+</head>
+
+<body class="body">
+
+    <div class="imageformcontainer">
+
+        <div class="imagecontainer" >
+            <img src="learning.png" alt="learning" srcset="" style="max-width: 100%;">
+        </div>
+
+        <div class="formcontainer" >
+
+            <h3> Registration Form</h3>
+
+            <form action="" name="SignupForm" id="SignupForm" onsubmit="processForm()">
+                <input type="text" name="fullname" id="fullname" placeholder="Enter Your full Name" required autofocus>
+                <input type="email" name="email" id="email" placeholder="Enter Your Email Address" required>
+                <input type="text" name="username" id="username" placeholder="Enter Your Username" required>
+                <input type="password" name="password" id="password" placeholder="Enter Your Password" required>
+                <input type="password" name="cpassword" id="cpassword" placeholder="Enter Your Password Again" required>
+                <input type="submit" value="Signup" class="submit"></form>
+        </div>
+
+        <div style="clear: left;">
+        </div>
+
+    </div>
+
+    <script>
+
+document.getElementById('SignupForm').addEventListener("submit", function(even){
+    event.preventDefault();
+})
+
+    function processForm()
+    {
+        var fullName = document.getElementById('fullname').value
+        var eMail = document.getElementById('email').value
+        var userName = document.getElementById('username').value
+        var password = document.getElementById('password').value
+        var cPassword = document.getElementById('cpassword').value
+        
+        if(password != cPassword){
+            alert('Password Mismatch.')
+        }else{
+        var data = {
+            "fullname" : fullName,
+            "email" : eMail,
+            "username" : userName,
+            "newpassword" : password,
+            "isEnabled" : true,
+            "roles" : ["user"],
+        }
+
+fetch('https://api.openclass.ng/Register', {
+    method: 'POST',
+    body:JSON.stringify(data),
+    headers:{
+        'Content-Type' : 'application/json'
+    }
+}).then(function(data){
+    alert('Congrats')
+})
+
+        }
+    }
+    </script>
+
+</body>
+
+</html>
